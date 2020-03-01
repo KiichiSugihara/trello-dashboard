@@ -1,18 +1,25 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <v-app>
+    <TDNavigation>
+      <template v-slot:titleText>
+        <span>{{ title }}</span>
+      </template>
+    </TDNavigation>
+    <v-content class="backGroundColor">
+      <div class="pa-4 white"></div>
+    </v-content>
+  </v-app>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
+import TDNavigation from "@/components/TDNavigation";
 export default {
-  name: 'Home',
+  name: "Home",
   components: {
-    HelloWorld
-  }
-}
+    TDNavigation
+  },
+  data: () => ({
+    title: "ホーム"
+  })
+};
 </script>
