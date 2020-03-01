@@ -6,7 +6,7 @@
       app
     >
       <v-list dense>
-        <router-link :to="{ name: 'home' }">
+        <router-link :to="{ name: 'Home' }">
           <v-btn icon large>
             <v-avatar size="32px" item>
               <v-img
@@ -86,11 +86,13 @@
           <slot name="titleText"></slot>
         </v-row>
         <v-row class="d-flex justify-end">
-          <router-link :to="{ name: 'user' }"
-            ><v-btn icon>
-              <v-icon>mdi-account</v-icon>
-            </v-btn></router-link
-          >
+          <!-- <router-link :to="{ name: 'user' }"
+            > -->
+          <v-btn icon>
+            <v-icon>mdi-account</v-icon>
+          </v-btn>
+          <!-- </router-link
+          > -->
           <v-dialog v-model="dialog" max-width="290">
             <template v-slot:activator="{ on }">
               <v-btn v-on="on" icon>
@@ -133,7 +135,7 @@ export default {
   methods: {
     logout() {
       this.dialog = false;
-      this.$router.push({ name: 'login' });
+      //this.$router.push({ name: 'login' });
     }
   }
 };
