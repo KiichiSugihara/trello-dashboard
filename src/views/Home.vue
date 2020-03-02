@@ -10,30 +10,36 @@
         <h1>{{ title }}</h1>
         <p>{{ boardItem }}</p>
         <p>{{ listItems }}</p>
+        <p>{{ cardItem }}</p>
       </div>
     </v-content>
   </v-app>
 </template>
 
 <script>
-import TDNavigation from '@/components/TDNavigation';
-import TrelloApi from '@/api/trelloApi';
+import TDNavigation from "@/components/TDNavigation";
+import TrelloApi from "@/api/trelloApi";
 export default {
-  name: 'Home',
+  name: "Home",
   components: {
     TDNavigation
   },
   data: () => ({
-    title: 'ホーム',
+    title: "ホーム",
     listItems: null,
     boardItem: null,
     loading: false,
     errored: false,
-    error: null
+    error: null,
+    cardItem: null
   }),
-  async created() {
+  async mounted() {
     await this.setBoardItem();
     await this.setListItems();
+
+    // if (this.listItems) {
+    await this.getCardsFromId("5d329fc8b0f6d116028d889a");
+    // }
   },
   methods: {
     async setBoardItem() {
@@ -50,6 +56,16 @@ export default {
       TrelloApi.getLists()
         .then(response => {
           this.listItems = response.data;
+        })
+        .catch(err => {
+          (this.errored = true), (this.error = err);
+        })
+        .finally(() => (this.loading = false));
+    },
+    getCardsFromId(listid) {
+      TrelloApi.getCards(listid)
+        .then(response => {
+          this.cardItem = response.data;
         })
         .catch(err => {
           (this.errored = true), (this.error = err);
