@@ -36,10 +36,6 @@ export default {
   async mounted() {
     await this.setBoardItem();
     await this.setListItems();
-
-    // if (this.listItems) {
-    await this.getCardsFromId("5d329fc8b0f6d116028d889a");
-    // }
   },
   methods: {
     async setBoardItem() {
@@ -56,6 +52,7 @@ export default {
       TrelloApi.getLists()
         .then(response => {
           this.listItems = response.data;
+          this.getCardsFromId(this.listItems[0].id);
         })
         .catch(err => {
           (this.errored = true), (this.error = err);
